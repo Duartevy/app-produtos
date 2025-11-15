@@ -1,35 +1,38 @@
 package br.com.equipe4.app_produtos.model;
 
+import java.util.Set;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.math.BigDecimal;
-
+@Table(name = "categories")
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "tb_produtos")
-public class Produtos {
+public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "codigo_barras")
-    private String codigoBarras;
-
-    private String nome;
-
     @Column(nullable = false)
-    private BigDecimal preco;
+    private String name;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User seller;
+    @JoinColumn(name = "parent_id")
+    private Category parent;
+
+    @OneToMany(mappedBy = "parent")
+    private Set<Category> children;
+
+    public Category(String name, Category parent) {
+        this.name = name;
+        this.parent = parent;
+    }
 
 }
