@@ -17,14 +17,14 @@ import java.util.List;
 public class UsuarioController {
 
     private final UsuarioService usuarioService;
-    private final UriUtils uriUtils;
+
 
     @PostMapping
     public ResponseEntity<UsuarioResponseDto> criarUsuario(@RequestBody UsuarioRequestDto usuarioRequestDto) {
 
         UsuarioResponseDto usuarioResponseDto = usuarioService.criarUsuario(usuarioRequestDto);
 
-        URI uri = uriUtils.criarUriParaRecurso(usuarioResponseDto.id());
+        URI uri = UriUtils.criarUriParaRecurso(usuarioResponseDto.id());
 
         return ResponseEntity.created(uri).body(usuarioResponseDto);
     }
