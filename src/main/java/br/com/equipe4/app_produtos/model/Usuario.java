@@ -6,6 +6,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDate;
 
@@ -15,6 +18,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "tb_usuario")
+@EntityListeners(AuditingEntityListener.class)
 public class Usuario {
 
     @Id
@@ -31,9 +35,11 @@ public class Usuario {
     @Min(6)
     private String senha;
 
-    @Column(name = "criado_em")
+    @CreatedDate
+    @Column(name = "criado_em", nullable = false, updatable = false)
     private LocalDate criado_em;
 
-    @Column(name = "atualizado_em")
+    @LastModifiedDate
+    @Column(name = "atualizado_em", nullable = false)
     private LocalDate atualizado_em;
 }

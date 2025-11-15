@@ -1,11 +1,14 @@
 package br.com.equipe4.app_produtos.controller;
 
+import br.com.equipe4.app_produtos.controller.utils.UriUtils;
 import br.com.equipe4.app_produtos.model.Usuario;
 import br.com.equipe4.app_produtos.service.UsuarioService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -14,10 +17,13 @@ import java.util.List;
 public class UsuarioController {
 
     private final UsuarioService usuarioService;
+    private final UriUtils uriUtils;
 
     @PostMapping
     public ResponseEntity<Usuario> criarUsuario(@RequestBody Usuario usuario) {
-       return ResponseEntity.ok(usuarioService.criarUsuario(usuario));
+        URI uri = uriUtils.criarUriParaRecurso(usuario.getId());
+
+        return ResponseEntity.created(uri).body(usuarioService.criarUsuario(usuario));
     }
 
     @GetMapping
