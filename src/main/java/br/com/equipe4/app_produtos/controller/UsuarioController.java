@@ -1,15 +1,12 @@
 package br.com.equipe4.app_produtos.controller;
 
 import br.com.equipe4.app_produtos.controller.utils.UriUtils;
-import br.com.equipe4.app_produtos.mapper.UsuarioMapper;
-import br.com.equipe4.app_produtos.model.Usuario;
 import br.com.equipe4.app_produtos.service.UsuarioService;
 import br.com.equipe4.app_produtos.service.dto.request.UsuarioRequestDto;
 import br.com.equipe4.app_produtos.service.dto.response.UsuarioResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
