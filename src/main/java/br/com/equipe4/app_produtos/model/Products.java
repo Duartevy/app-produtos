@@ -13,23 +13,30 @@ import java.math.BigDecimal;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "tb_produtos")
-public class Produtos {
+@Table(name = "products")
+public class Products {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "codigo_barras")
-    private String codigoBarras;
+    @Column(name = "barcode")
+    private String barcode;
 
-    private String nome;
+    private String name;
 
     @Column(nullable = false)
-    private BigDecimal preco;
+    private BigDecimal price;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User seller;
+
+    @ManyToOne
+    @JoinColumn(name = "category_id", nullable = false)
+    private Category category;
+
+    @OneToOne(mappedBy = "product", cascade = CascadeType.ALL)
+    private Inventory inventory;
 
 }

@@ -4,7 +4,7 @@ import br.com.equipe4.app_produtos.validation.Annotations.NaoVazioSeInformado;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
-public class NaoVazioSeInformadoValidator implements ConstraintValidator<NaoVazioSeInformado, String> {
+public class NotBlankIfPresent implements ConstraintValidator<NaoVazioSeInformado, String> {
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {

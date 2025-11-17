@@ -4,14 +4,14 @@ import br.com.equipe4.app_produtos.validation.Annotations.NaoNulo;
 import br.com.equipe4.app_produtos.validation.Annotations.NaoVazioSeInformado;
 import jakarta.validation.constraints.Email;
 
-public record UsuarioRequestDto(
+public record UserRequestDTO(
         @NaoVazioSeInformado(message = "Campo obrigatório!")
         @NaoNulo(message = "Campo obrigatório!")
-        String nome,
+        String name,
         @NaoNulo(message = "Campo obrigatório!")
         @Email(message = "Digite um email válido!")
         String email,
         @NaoVazioSeInformado(message = "Campo obrigatório!")
         @NaoNulo(message = "Campo obrigatório!")
-        String senha) {
+        String password) {
 }
