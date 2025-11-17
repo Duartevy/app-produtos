@@ -55,7 +55,7 @@ public class AuthenticationController {
             return ResponseEntity.status(401).body("Invalid refresh token");
         }
 
-        var user = userRepository.findByLogin(login);
+        var user = userRepository.findByUsername(login);
         if (user == null) {
             return ResponseEntity.status(401).body("User not found");
         }
