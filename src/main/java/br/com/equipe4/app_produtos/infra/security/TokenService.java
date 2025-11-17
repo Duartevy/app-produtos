@@ -26,7 +26,7 @@ public class TokenService {
             Algorithm algorithm = Algorithm.HMAC256(secret);
             String token = JWT.create()
                 .withIssuer("AppProdutos")
-                .withSubject(user.getLogin())
+                .withSubject(user.getUsername())
                 .withExpiresAt(genAccessTokenExpirationDate())
                 .sign(algorithm);
             return token;
@@ -40,7 +40,7 @@ public class TokenService {
             Algorithm algorithm = Algorithm.HMAC256(secret);
             String token = JWT.create()
                 .withIssuer("AppProdutos")
-                .withSubject(user.getLogin())
+                .withSubject(user.getUsername())
                 .withExpiresAt(genRefreshTokenExpirationDate())
                 .sign(algorithm);
             return token;

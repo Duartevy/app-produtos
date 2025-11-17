@@ -1,8 +1,8 @@
 package br.com.equipe4.app_produtos.common;
 
-import br.com.equipe4.app_produtos.exceptions.EntidadeNaoEncontradaException;
-import br.com.equipe4.app_produtos.service.dto.erroDto.ErroCampo;
-import br.com.equipe4.app_produtos.service.dto.erroDto.ErroResposta;
+import br.com.equipe4.app_produtos.infra.exceptions.EntityNotFoundException;
+import br.com.equipe4.app_produtos.service.dto.errorDto.ValidationError;
+import br.com.equipe4.app_produtos.service.dto.errorDto.ErrorResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
@@ -19,22 +19,22 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
-    public ErroResposta handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
+    public ErrorResponse handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
         log.error("erro de validação: {} ", e.getMessage());
 
         List<FieldError> fieldErrors = e.getFieldErrors();
 
-        List<ErroCampo> listaErros = fieldErrors
+        List<ValidationError> listaErros = fieldErrors
                 .stream()
-                .map(fie -> new ErroCampo(fie.getField(), fie.getDefaultMessage())).toList();
+                .map(fie -> new ValidationError(fie.getField(), fie.getDefaultMessage())).toList();
 
-        return new ErroResposta(HttpStatus.UNPROCESSABLE_ENTITY.value(), " erro de validação", listaErros);
+        return new ErrorResponse(HttpStatus.UNPROCESSABLE_ENTITY.value(), " erro de validação", listaErros);
 
     }
 
-    @ExceptionHandler(EntidadeNaoEncontradaException.class)
+    @ExceptionHandler(EntityNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ErroResposta handlerRegistroDuplicadoException(EntidadeNaoEncontradaException e) {
-        return ErroResposta.conflito(e.getMessage());
+    public ErrorResponse handlerRegistroDuplicadoException(EntityNotFoundException e) {
+        return ErrorResponse.conflict(e.getMessage());
     }
 }

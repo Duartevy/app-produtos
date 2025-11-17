@@ -72,7 +72,7 @@ public class AuthenticationController {
         User user = null;
         if (principal instanceof User) {
             user = (User) principal;
-            return ResponseEntity.ok(new UserResponseDTO(user.getId(), user.getLogin(), user.getRole()));
+            return ResponseEntity.ok(new UserResponseDTO(user.getId(), user.getUsername(), user.getRole()));
         } else if (principal instanceof UserDetails) {
             UserDetails userDetails = (UserDetails) principal;
             return ResponseEntity.ok(userDetails.getUsername());
