@@ -29,7 +29,7 @@ public class GlobalExceptionHandler {
                 .stream()
                 .map(fie -> new ValidationError(fie.getField(), fie.getDefaultMessage())).toList();
 
-        return new ErrorResponse(HttpStatus.UNPROCESSABLE_ENTITY.value(), " erro de validação", listaErros);
+        return new ErrorResponse(HttpStatus.UNPROCESSABLE_ENTITY.value(), " error vadilation", listaErros);
 
     }
 
