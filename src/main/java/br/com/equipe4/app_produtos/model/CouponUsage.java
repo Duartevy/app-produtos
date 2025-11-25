@@ -6,26 +6,28 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "coupon_usages")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "tb_produtos")
-public class Produtos {
+public class CouponUsage {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "codigo_barras")
-    private String codigoBarras;
+    @ManyToOne
+    @JoinColumn(name = "coupon_id", nullable = false)
+    private Coupon coupon;
 
-    private String nome;
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
-    @Column(nullable = false)
-    private BigDecimal preco;
+    private LocalDateTime usedAt;
 
 }
